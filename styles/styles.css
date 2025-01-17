@@ -7,8 +7,10 @@ body {
 
 }
 
-/* Main Menu Style */
 
+.display{
+    display: none
+}
 .title-box{
     margin-top: 100px;
     height: 110px;
@@ -58,7 +60,7 @@ body {
     border-radius: 25px;
 }
 
-/* Rules Styles */
+
 
 .rules-box{
     margin-top: 80px;
@@ -76,6 +78,8 @@ body {
     font-size: 40px;
 }
 
+
+
 .rules-text{
     font-size: 32px;
     font-family: 'Times New Roman', Times, serif;
@@ -83,7 +87,7 @@ body {
 
 }
 
-/* Gamemode */
+
 
 .mode-btn{
     font-size: 48px;
@@ -104,7 +108,7 @@ body {
 }
 
 
-/* Sudden Death */
+
 
 .fighter-image{
   
@@ -124,26 +128,18 @@ body {
 
 .fighter-margin{
     margin-top: 50px;
-    margin-left: 120px;
+    margin-left: 50px;
 }
 
 .fighter-two-margin{
     margin-top: 50px;
-    margin-left: 320px; 
+    margin-left: 250px; 
 }
 
 .fighter-three-margin{
     margin-left: 50px;
+    
 }
 
 
-/* Best of 3 */
-
-/* Best of 5 */
-
-/* Best of 7 */
-
-/* Win Screen */
-
-/* Lose Screen */
 
