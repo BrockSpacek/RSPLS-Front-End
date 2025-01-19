@@ -20,7 +20,8 @@ body {
 }
 
 .title-text{
-    font-size: 72px;
+    margin-top: 10px;
+    font-size: 60px;
     font-family:'Times New Roman', Times, serif;
     text-align: center;
 }
