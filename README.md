@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-=======
 Brock Spacek 
 1/19/25
 RPSLS Game - Front End
 Description: 
 
+### Desktop only version made in 1440 x 1024 
 You are to make Rock, Paper, Scissors, Lizard, Spock game.
 
 Here are the requirements:
@@ -20,4 +19,3 @@ Must be designed, on Github, and Hosted on Vercel
 Peer Review: Kassandra
 
 Comments: The Functionality works well and the design looks nice. The only problem I had was the styling got a bit funky on my computer. There would be a bar of white at the bottom and I would have to scroll. 
->>>>>>> 3edfbacde4672fe1f4a38f29c82e03dd778466c3
