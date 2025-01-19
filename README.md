@@ -1,0 +1,1 @@
+Review By: Kassandra Spacek: The Functionality works well and the design looks nice. The only problem I had was the styling got a bit funky on my computer. There would be a bar of white at the bottom and I would have to scroll. 
