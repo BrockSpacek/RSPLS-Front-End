@@ -32,61 +32,1444 @@ let mainMargin = document.getElementById("mainMargin");
 
 let CpuResponse = "";
 let userResponse = "";
+let userScore = 0;
+let cpuScore = 0;
+let userTwoScore = 0;
+
+let suddenDeath = false;
+let bestof3 = false;
+let bestof5 = false;
+let bestof7 = false;
 
 async function gameLogic() {
 
-    console.log(userResponse);
-    console.log(CpuResponse);
 
-  switch (userResponse) {
+  console.log(userResponse);
+  console.log(CpuResponse);
+
+  if (suddenDeath == true) {
+    switch (userResponse) {
+      case "Rock":
+        if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+          titleText.innerText = `You Win! ${userResponse} beats ${CpuResponse}`
+        } else if (CpuResponse == "Spock" || CpuResponse == "Paper") {
+          titleText.innerText = `You Lose! ${CpuResponse} beats ${userResponse}`
+        } else {
+          titleText.innerText = "Draw! No one wins!";
+        }
+        break;
+      case "Paper":
+        if (CpuResponse == "Rock" || CpuResponse == "Spock") {
+          titleText.innerText = `You Win! ${userResponse} beats ${CpuResponse}`
+        } else if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+          titleText.innerText = `You Lose! ${CpuResponse} beats ${userResponse}`
+        } else {
+          titleText.innerText = "Draw!";
+        }
+        break;
+      case "Scissors":
+        if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
+          titleText.innerText = `You Win! ${userResponse} beats ${CpuResponse}`
+        } else if (CpuResponse == "Spock" || CpuResponse == "Rock") {
+          titleText.innerText = `You Lose! ${CpuResponse} beats ${userResponse}`
+        } else {
+          titleText.innerText = "Draw!";
+        }
+        break;
+      case "Lizard":
+        if (CpuResponse == "Paper" || CpuResponse == "Spock") {
+          titleText.innerText = `You Win! ${userResponse} beats ${CpuResponse}`
+        } else if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+          titleText.innerText = `You Lose! ${CpuResponse} beats ${userResponse}`
+        } else {
+          titleText.innerText = "Draw!";
+        }
+        break;
+      case "Spock":
+        if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+          titleText.innerText = `You Win! ${userResponse} beats ${CpuResponse}`
+        } else if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
+          titleText.innerText = `You Lose! ${CpuResponse} beats ${userResponse}`
+        } else {
+          titleText.innerText = "Draw!";
+        }
+        break;
+      default:
+        titleText.innerText = "Hmmmm something is wrong please try again!";
+        break;
+    } 
+
+
+
+
+  } else if (bestof3 == true){
+    switch (userResponse) {
+        case "Rock":
+          if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+            userScore++;
+
+            if(userScore > 1 && cpuScore < 2){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+
+            titleText.innerText = "You Win! Choose Fighter";
+
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            }
+            
+          } else if (CpuResponse == "Spock" || CpuResponse == "Paper") {
+            cpuScore++;
+
+            if(userScore < 2 && cpuScore > 1){
+
+               
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+
+            titleText.innerText = "You Lose! Choose Fighter";
+
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            titleText.innerText = "Draw! Choose Fighter";
+
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+          }
+          break;
+        case "Paper":
+          if (CpuResponse == "Rock" || CpuResponse == "Spock") {
+            userScore++;
+
+            if(userScore > 1 && cpuScore < 2){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+            cpuScore++;
+
+            if(userScore < 2 && cpuScore > 1){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          
+          break;
+        case "Scissors":
+          if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
+            userScore++;
+
+            if(userScore > 1 && cpuScore < 2){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Spock" || CpuResponse == "Rock") {
+            cpuScore++;
+
+            if(userScore < 2 && cpuScore > 1){
+
+               
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+
+        case "Lizard":
+          if (CpuResponse == "Paper" || CpuResponse == "Spock") {
+            userScore++;
+
+            if(userScore > 1 && cpuScore < 2){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+            cpuScore++;
+
+            if(userScore < 2 && cpuScore > 1){
+
+              
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+        case "Spock":
+          if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+           
+            userScore++;
+
+            if(userScore > 1 && cpuScore < 2){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Paper" || CpuResponse == "Lizard") {
+            cpuScore++;
+
+            if(userScore < 2 && cpuScore > 1){
+
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+        default:
+          titleText.innerText = "Hmmmm something is wrong please try again!";
+          break;
+    }
+
+
+
+
+  } else if (bestof5 == true){
+    switch (userResponse) {
     case "Rock":
       if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
-        titleText.innerText = "You Win!";
+        userScore++;
+
+        if(userScore > 2 && cpuScore < 3){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+
+        titleText.innerText = "You Win! Choose Fighter";
+
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+        }
+        
       } else if (CpuResponse == "Spock" || CpuResponse == "Paper") {
-        titleText.innerText = "You Lose!";
+        cpuScore++;
+
+        if(userScore < 3 && cpuScore > 2){
+
+           
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+
+        titleText.innerText = "You Lose! Choose Fighter";
+
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+        }
+        
       } else {
-        titleText.innerText = "Draw";
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        titleText.innerText = "Draw! Choose Fighter";
+
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
       }
       break;
     case "Paper":
       if (CpuResponse == "Rock" || CpuResponse == "Spock") {
-        titleText.innerText = "You Win!";
+        userScore++;
+
+        if(userScore > 2 && cpuScore < 3){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Win! Choose Fighter";
+        }
+        
       } else if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
-        titleText.innerText = "You Lose!";
+        cpuScore++;
+
+        if(userScore < 3 && cpuScore > 2){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Lose! Choose Fighter";
+        }
+        
       } else {
-        titleText.innerText = "Draw";
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "Draw! Choose Fighter";
       }
+      
       break;
     case "Scissors":
       if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
-        titleText.innerText = "You Win!";
+        userScore++;
+
+        if(userScore > 2 && cpuScore < 3){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Win! Choose Fighter";
+        }
+        
       } else if (CpuResponse == "Spock" || CpuResponse == "Rock") {
-        titleText.innerText = "You Lose!";
+        cpuScore++;
+
+        if(userScore < 3 && cpuScore > 2){
+
+           
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Lose! Choose Fighter";
+        }
+        
       } else {
-        titleText.innerText = "Draw";
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "Draw! Choose Fighter";
       }
       break;
+
     case "Lizard":
       if (CpuResponse == "Paper" || CpuResponse == "Spock") {
-        titleText.innerText = "You Win!";
+        userScore++;
+
+        if(userScore > 2 && cpuScore < 3){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Win! Choose Fighter";
+        }
+        
       } else if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
-        titleText.innerText = "You Lose!";
+        cpuScore++;
+
+        if(userScore < 3 && cpuScore > 2){
+
+          
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Lose! Choose Fighter";
+        }
+        
       } else {
-        titleText.innerText = "Draw";
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "Draw! Choose Fighter";
       }
       break;
     case "Spock":
       if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
-        titleText.innerText = "You Win!";
-      } else if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
-        titleText.innerText = "You Lose!";
+       
+        userScore++;
+
+        if(userScore > 2 && cpuScore < 3){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Win! Choose Fighter";
+        }
+        
+      } else if (CpuResponse == "Paper" || CpuResponse == "Lizard") {
+        cpuScore++;
+
+        if(userScore < 3 && cpuScore > 2){
+
+            rockBtn.className = "col-4 display";
+            paperBtn.className = "col-4 display";
+            scissorsBtn.className = "col-4 display";
+            lizardBtn.className = "col-4 display";
+            spockBtn.className = "col-4 fighter-three-margin display";
+            playAgainBtn.className = "new-game-btn";
+            mainMenuTwoBtn.className = "rules-btn";
+        
+         
+            mainMargin.className = "container main-margin";
+
+            titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+
+            userScore = 0;
+            cpuScore = 0;
+        
+        }else{
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+
+        titleText.innerText = "You Lose! Choose Fighter";
+        }
+        
       } else {
-        titleText.innerText = "Draw";
+        rockBtn.className = "col-4";
+        paperBtn.className = "col-4";
+        scissorsBtn.className = "col-4";
+        lizardBtn.className = "col-4";
+        spockBtn.className = "col-4 fighter-three-margin";
+        mainMenuTitle.className = "container title-box";
+        titleText.className = "col title-text";
+        mainMargin.className = "container";
+        playAgainBtn.className = "new-game-btn display";
+        mainMenuTwoBtn.className = "rules-btn display";
+        
+        titleText.innerText = "Draw! Choose Fighter";
       }
       break;
     default:
       titleText.innerText = "Hmmmm something is wrong please try again!";
       break;
+  }
+
+  
+  } else if (bestof7 == true){
+    {switch (userResponse) {
+        case "Rock":
+          if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+            userScore++;
+    
+            if(userScore > 3 && cpuScore < 4){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+    
+            titleText.innerText = "You Win! Choose Fighter";
+    
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            }
+            
+          } else if (CpuResponse == "Spock" || CpuResponse == "Paper") {
+            cpuScore++;
+    
+            if(userScore < 4 && cpuScore > 3){
+    
+               
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+    
+            titleText.innerText = "You Lose! Choose Fighter";
+    
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            titleText.innerText = "Draw! Choose Fighter";
+    
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+          }
+          break;
+        case "Paper":
+          if (CpuResponse == "Rock" || CpuResponse == "Spock") {
+            userScore++;
+    
+            if(userScore > 3 && cpuScore < 4){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Scissors" || CpuResponse == "Lizard") {
+            cpuScore++;
+    
+            if(userScore < 4 && cpuScore > 3){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          
+          break;
+        case "Scissors":
+          if (CpuResponse == "Lizard" || CpuResponse == "Paper") {
+            userScore++;
+    
+            if(userScore > 3 && cpuScore < 4){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Spock" || CpuResponse == "Rock") {
+            cpuScore++;
+    
+            if(userScore < 4 && cpuScore > 3){
+    
+               
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+    
+        case "Lizard":
+          if (CpuResponse == "Paper" || CpuResponse == "Spock") {
+            userScore++;
+    
+            if(userScore > 3 && cpuScore < 4){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+            cpuScore++;
+    
+            if(userScore < 4 && cpuScore > 3){
+    
+              
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+        case "Spock":
+          if (CpuResponse == "Scissors" || CpuResponse == "Rock") {
+           
+            userScore++;
+    
+            if(userScore > 3 && cpuScore < 4){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Won The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Win! Choose Fighter";
+            }
+            
+          } else if (CpuResponse == "Paper" || CpuResponse == "Lizard") {
+            cpuScore++;
+    
+            if(userScore < 4 && cpuScore > 3){
+    
+                rockBtn.className = "col-4 display";
+                paperBtn.className = "col-4 display";
+                scissorsBtn.className = "col-4 display";
+                lizardBtn.className = "col-4 display";
+                spockBtn.className = "col-4 fighter-three-margin display";
+                playAgainBtn.className = "new-game-btn";
+                mainMenuTwoBtn.className = "rules-btn";
+            
+             
+                mainMargin.className = "container main-margin";
+    
+                titleText.innerText = `You Lost The Match ${userScore} - ${cpuScore}!!!`
+    
+                userScore = 0;
+                cpuScore = 0;
+            
+            }else{
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+    
+            titleText.innerText = "You Lose! Choose Fighter";
+            }
+            
+          } else {
+            rockBtn.className = "col-4";
+            paperBtn.className = "col-4";
+            scissorsBtn.className = "col-4";
+            lizardBtn.className = "col-4";
+            spockBtn.className = "col-4 fighter-three-margin";
+            mainMenuTitle.className = "container title-box";
+            titleText.className = "col title-text";
+            mainMargin.className = "container";
+            playAgainBtn.className = "new-game-btn display";
+            mainMenuTwoBtn.className = "rules-btn display";
+            
+            titleText.innerText = "Draw! Choose Fighter";
+          }
+          break;
+        default:
+          titleText.innerText = "Hmmmm something is wrong please try again!";
+          break;
+      }
+    }
+} else {
+    titleText.innerText = "Somehow you broke it. You Auto Win"
   }
 }
 
@@ -98,8 +1481,8 @@ newGameBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -124,8 +1507,8 @@ rulesBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -148,8 +1531,8 @@ mainMenuBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -174,8 +1557,8 @@ vsCpuBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn";
   bestOf3Btn.className = "mode-btn";
-  bestOf5Btn.className = "mode-btn";
-  bestOf7Btn.className = "mode-btn";
+   bestOf5Btn.className = "mode-btn mt-4";
+  bestOf7Btn.className = "mode-btn mt-4";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -200,8 +1583,8 @@ suddenDeathBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4";
   paperBtn.className = "col-4";
   scissorsBtn.className = "col-4";
@@ -209,13 +1592,15 @@ suddenDeathBtn.addEventListener("click", function () {
   spockBtn.className = "col-4 fighter-three-margin";
   playAgainBtn.className = "new-game-btn display";
   mainMenuTwoBtn.className = "rules-btn display";
-  mainMargin.className = "container"
+  mainMargin.className = "container";
 
   mainMenuTitle.className = "container title-box";
   titleText.className = "col title-text";
   rulesTitle.className = "container rules-box display";
 
   titleText.innerText = "Choose Fighter";
+
+  suddenDeath = true;
 });
 
 bestOf3Btn.addEventListener("click", function () {
@@ -226,8 +1611,8 @@ bestOf3Btn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4";
   paperBtn.className = "col-4";
   scissorsBtn.className = "col-4";
@@ -239,9 +1624,11 @@ bestOf3Btn.addEventListener("click", function () {
   mainMenuTitle.className = "container title-box";
   titleText.className = "col title-text";
   rulesTitle.className = "container rules-box display";
-  mainMargin.className = "container fighter-margin";
+  mainMargin.className = "container";
 
   titleText.innerText = "Choose Fighter";
+
+  bestof3 = true;
 });
 
 bestOf5Btn.addEventListener("click", function () {
@@ -252,8 +1639,8 @@ bestOf5Btn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4";
   paperBtn.className = "col-4";
   scissorsBtn.className = "col-4";
@@ -265,9 +1652,11 @@ bestOf5Btn.addEventListener("click", function () {
   mainMenuTitle.className = "container title-box";
   titleText.className = "col title-text";
   rulesTitle.className = "container rules-box display";
-  mainMargin.className = "container fighter-margin";
+  mainMargin.className = "container";
 
   titleText.innerText = "Choose Fighter";
+
+  bestof5 = true;
 });
 
 bestOf7Btn.addEventListener("click", function () {
@@ -278,8 +1667,8 @@ bestOf7Btn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4";
   paperBtn.className = "col-4";
   scissorsBtn.className = "col-4";
@@ -291,9 +1680,11 @@ bestOf7Btn.addEventListener("click", function () {
   mainMenuTitle.className = "container title-box";
   titleText.className = "col title-text";
   rulesTitle.className = "container rules-box display";
-  mainMargin.className = "container fighter-margin";
+  mainMargin.className = "container";
 
   titleText.innerText = "Choose Fighter";
+
+  bestof7 = true;
 });
 
 rockBtn.addEventListener("click", async function () {
@@ -304,8 +1695,8 @@ rockBtn.addEventListener("click", async function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -322,12 +1713,9 @@ rockBtn.addEventListener("click", async function () {
   userResponse = "Rock";
 
   fetchCPU();
-
 });
 
 paperBtn.addEventListener("click", async function () {
-  
-
   newGameBtn.className = "new-game-btn display";
   rulesBtn.className = "rules-btn display";
   mainMenuBtn.className = "main-menu-btn display";
@@ -335,8 +1723,8 @@ paperBtn.addEventListener("click", async function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -350,14 +1738,12 @@ paperBtn.addEventListener("click", async function () {
   rulesTitle.className = "container rules-box display";
   mainMargin.className = "container main-margin";
 
- userResponse = "Paper"
+  userResponse = "Paper";
 
- fetchCPU();
+  fetchCPU();
 });
 
 scissorsBtn.addEventListener("click", async function () {
-  
-
   newGameBtn.className = "new-game-btn display";
   rulesBtn.className = "rules-btn display";
   mainMenuBtn.className = "main-menu-btn display";
@@ -365,8 +1751,8 @@ scissorsBtn.addEventListener("click", async function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -380,14 +1766,12 @@ scissorsBtn.addEventListener("click", async function () {
   rulesTitle.className = "container rules-box display";
   mainMargin.className = "container main-margin";
 
- userResponse = "Scissors"
+  userResponse = "Scissors";
 
- fetchCPU();
+  fetchCPU();
 });
 
 lizardBtn.addEventListener("click", async function () {
- 
-
   newGameBtn.className = "new-game-btn display";
   rulesBtn.className = "rules-btn display";
   mainMenuBtn.className = "main-menu-btn display";
@@ -395,8 +1779,8 @@ lizardBtn.addEventListener("click", async function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -410,14 +1794,12 @@ lizardBtn.addEventListener("click", async function () {
   rulesTitle.className = "container rules-box display";
   mainMargin.className = "container main-margin";
 
-  userResponse = "Lizard"
+  userResponse = "Lizard";
 
   fetchCPU();
 });
 
 spockBtn.addEventListener("click", async function () {
-
-
   newGameBtn.className = "new-game-btn display";
   rulesBtn.className = "rules-btn display";
   mainMenuBtn.className = "main-menu-btn display";
@@ -425,8 +1807,8 @@ spockBtn.addEventListener("click", async function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -440,9 +1822,9 @@ spockBtn.addEventListener("click", async function () {
   rulesTitle.className = "container rules-box display";
   mainMargin.className = "container main-margin";
 
- userResponse = "Spock"
+  userResponse = "Spock";
 
- fetchCPU();
+  fetchCPU();
 });
 
 playAgainBtn.addEventListener("click", function () {
@@ -453,8 +1835,8 @@ playAgainBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
@@ -471,7 +1853,7 @@ playAgainBtn.addEventListener("click", function () {
   titleText.innerText = "Choose Game Mode";
 });
 
-mainMenuBtn.addEventListener("click", function () {
+mainMenuTwoBtn.addEventListener("click", function () {
   newGameBtn.className = "new-game-btn";
   rulesBtn.className = "rules-btn";
   mainMenuBtn.className = "main-menu-btn display";
@@ -479,8 +1861,8 @@ mainMenuBtn.addEventListener("click", function () {
   vsCpuBtn.className = "rules-btn display";
   suddenDeathBtn.className = "mode-btn display";
   bestOf3Btn.className = "mode-btn display";
-  bestOf5Btn.className = "mode-btn display";
-  bestOf7Btn.className = "mode-btn display";
+   bestOf5Btn.className = "mode-btn mt-4 display";
+  bestOf7Btn.className = "mode-btn mt-4 display";
   rockBtn.className = "col-4 display";
   paperBtn.className = "col-4 display";
   scissorsBtn.className = "col-4 display";
