@@ -3,7 +3,7 @@ Brock Spacek
 RPSLS Game - Front End
 Description: 
 
-### Desktop only version made in 1440 x 1024 
+### Desktop only version made in 1440 x 1024 and looks great on my screen
 You are to make Rock, Paper, Scissors, Lizard, Spock game.
 
 Here are the requirements:
